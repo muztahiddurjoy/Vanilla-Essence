@@ -6,6 +6,23 @@ const port = 3001
 const host = 'localhost'
 
 const server = http.createServer((req, res) => {
+    const cssPath = path.join(__dirname, 'css', req.url);
+    const fontPath = path.join(__dirname, 'public', req.url);
+    fs.readFile(cssPath, (err, data) => {
+        if (err) {
+            res.end('File not found');
+        } else {
+            res.end(data);
+        }
+    });
+    
+    fs.readFile(fontPath, (err, data) => {
+        if (err) {
+            res.end('File not found');
+        } else {
+            res.end(data);
+        }
+    });
     switch(req.url){
         case '/':
             handleHomeRequest(req,res)
@@ -121,7 +138,7 @@ const getTodoPage = (req,res)=>{
         case "GET":
             res.statusCode = 200
             res.setHeader('Content-Type','text/html')
-            const file = fs.readFileSync(path.join(__dirname,'../views/todo.html')).toString()
+            const file = fs.readFileSync(path.join(__dirname,'./views/todo.html')).toString()
             res.end(file)
             break;
         default:    
@@ -139,3 +156,4 @@ const getTodoPage = (req,res)=>{
 server.listen(port,host,()=>{
     console.log('Server is running on port:',port)
 })
+ 

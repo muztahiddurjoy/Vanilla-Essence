@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Bindu-ToDo</title>
-    <link rel="stylesheet" href="./css/fonts.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+        *{
+            margin:0;
+            padding:0;
+            font-family: 'SF Pro Display', sans-serif;
+            font-weight: 400;
+        }
+        body{
+            background-color: #e4e4e4;
+        }
+        .about__title{
+            font-weight: 800;
+            font-size: 35px;
+            opacity: 0;
+            animation: slideTop 0.5s ease-in-out 1.5s forwards;
+        }
+        .about__desc{
+            font-size: 15px;
+            color:#5f5f5f;
+            opacity: 0;
+            animation: slideTop 0.5s ease-in-out 1.7s forwards;
+        }
+        @keyframes slideTop {
+            0%{
+                opacity: 0;
+                margin-top: 40px;
+            }
+            100%{
+                opacity: 1;
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div style="padding:30px">
