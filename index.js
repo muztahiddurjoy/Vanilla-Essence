@@ -32,7 +32,7 @@ const handleHomeRequest = (req,res)=>{
         case "GET":
             res.statusCode = 200
             res.setHeader('Content-Type','text/html')
-            const file = fs.readFileSync(path.join(__dirname,'../views/index.html')).toString()
+            const file = fs.readFileSync(path.join(__dirname,'./views/index.html')).toString()
             res.end(file)
             break;
         default:    
@@ -51,7 +51,7 @@ const handleToDoRequest = (req,res)=>{
         case "GET":
             res.statusCode = 200
             res.setHeader('Content-Type','application/json')
-            const result = fs.readFileSync(path.join(__dirname,'../db/todo.json'))
+            const result = fs.readFileSync(path.join(__dirname,'./db/todo.json'))
             res.end(result)
             break;
         default:    
@@ -70,7 +70,7 @@ const handleToDoPostRequest = (req,res)=>{
             try{
                 res.statusCode = 200
                 res.setHeader('Content-Type','application/json')
-                const result = fs.readFileSync(path.join(__dirname,'../db/todo.json'))
+                const result = fs.readFileSync(path.join(__dirname,'./db/todo.json'))
                 let data = JSON.parse(result)
                 
                 res.end(JSON.stringify({
@@ -102,7 +102,7 @@ const handleAboutRequest = (req,res)=>{
         case "GET":
             res.statusCode = 200
             res.setHeader('Content-Type','text/html')
-            const file = fs.readFileSync(path.join(__dirname,'../views/about.html')).toString()
+            const file = fs.readFileSync(path.join(__dirname,'./views/about.html')).toString()
             res.end(file)
             break;
         default:    

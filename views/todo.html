@@ -5,8 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo - Bindu-ToDo</title>
     <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    
+    <div class="todo__maingrid">
+        <div class="todo__todaycontainer">
+            <p class="todo__title__text">Your Tasks</p>
+            <form class="todo__add">
+                <input type="text" class="todo__add_input" placeholder="Add Task">
+                <button type="submit" class="todo__add_button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="28" width="28" stroke="#fff">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      </svg>                      
+                </button>
+            </form>
+            
+            <ul class="todo__tasklist">
+                <li class="todo__taskcontainer">
+                        <input type="checkbox" id="random" class="todo__taskcheck">
+                        <div class="">
+                            <label class="todo__tasktext" for="random">Meeting with client</label>
+                            <p class="todo__taskdate">10/10/2023</p>
+                        </div>
+                        
+                </li>
+                <li class="todo__taskcontainer">
+                    <input type="checkbox" class="todo__taskcheck">
+                    
+                    <div class="">
+                        <p class="todo__tasktext">Meeting with client</p>
+                        <p class="todo__taskdate">10/10/2023</p>
+                    </div>
+                    
+            </li>
+            </ul>
+        </div>
+       
+       
+        
+    </div>
 </body>
 </html>

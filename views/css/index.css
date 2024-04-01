@@ -60,6 +60,96 @@ body{
     animation: slideTop 0.5s ease-in-out 0.7s forwards;
 }
 
+.todo__title__text{
+    font-weight: 800;
+    font-size: 22px;
+    margin-top: 10px;
+}
+.todo__maingrid{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.todo__add{
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    position: relative;
+}
+.todo__col_span_2{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.todo__todaycontainer{
+    border: 1px solid #c8c8c8;
+    border-radius: 10px;
+    width: 400px;
+    padding: 10px;
+    height: 90vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.todo__tasklist{
+    list-style: none;   
+    height: 100%;
+    overflow-y: scroll;
+}
+.todo__tasklist::-webkit-scrollbar{
+    display: none;
+}
+.todo__taskcontainer{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 0px 10px 0px;
+    transition: all 0.1s ease-in-out 0s;
+}
+.todo__taskcontainer:hover{
+    background-color: #d8d8d8;
+}
+.todo__taskcheck{
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 3px;
+}
+.todo__tasktext{
+    font-size: 17px;
+    font-weight: 500;
+}
+.todo__taskdate{
+    margin-top: 2px;
+    font-size: 12px;
+    color:#5f5f5f;
+    font-weight: 300;
+}
+.todo__add_input{
+    padding:10px;
+    border-radius: 5px;
+    border: 1px #c8c8c8 solid;
+    width: 100%;
+}
+.todo__add_button{
+    margin-left: 5px;
+    height: 100%;
+    width: 50px;
+    background-color: #171717;
+    border:0px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.todo__add_button:hover{
+    background-color: #2e2e2e;
+}
+
+
+
+
 @keyframes slideTop {
     0%{
         opacity: 0;
