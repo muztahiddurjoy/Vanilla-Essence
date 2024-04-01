@@ -1,0 +1,11 @@
+{
+  "name": "bindulogic-project-1.0",
+  "version": "1.0.0",
+  "description": "A simple webserver which serves 3 simple webpages",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Muztahid Durjoy",
+  "license": "ISC"
+}
