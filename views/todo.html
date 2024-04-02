@@ -123,12 +123,11 @@
         </div>
     </div>
     <script>
-           
+        
 
         document.getElementById('todoForm').addEventListener('submit',(e)=>{
             e.preventDefault()
             const task = document.getElementById('tasktextbox').value
-            console.log(task)
             fetch('/todo/api/new',{
                 method:'POST',
                 headers:{
@@ -141,6 +140,18 @@
             }).then((res)=> res.json().then(()=> window.location.reload()))
             
         })
+        const handleCheckboxClick = (id) =>{
+            fetch('/todo/api',{
+                method:'PUT',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    id,
+                })
+            }).then((promise)=> promise.json().then(()=> window.location.reload()))
+        }
+        
     </script>
 </body>
 </html>

@@ -54,6 +54,33 @@ const handleToDoRequest = (req,res)=>{
             const result = fs.readFileSync(path.join(__dirname,'./db/todo.json'))
             res.end(result)
             break;
+        case "PUT":
+                try{
+                    res.statusCode = 200
+                    res.setHeader('Content-Type','application/json')
+                    const result = fs.readFileSync(path.join(__dirname,'./db/todo.json'))
+                    let data = JSON.parse(result)
+                    let newData = ''
+                    req.on('data',(chunk)=>{
+                        newData += String(chunk)
+                    })
+                    req.on('end',()=>{
+                        const {id} = JSON.parse(newData)
+                        data[id-1].completed = !data[id-1].completed
+                        fs.writeFileSync(path.join(__dirname,'./db/todo.json'),JSON.stringify(data))
+                        res.end(JSON.stringify({
+                            status:200,
+                            message:'Todo updated successfully'
+                        }))
+                    })
+                }
+                catch(err){
+                    res.end(JSON.stringify({
+                        status:500,
+                        message:String(err)
+                    }))
+                }
+                break;
         default:    
             res.statusCode = 404
             res.setHeader('Content-Type','application/json')
@@ -99,6 +126,7 @@ const handleToDoPostRequest = (req,res)=>{
             }
            
             break;
+       
         default:    
             res.statusCode = 404
             res.setHeader('Content-Type','application/json')
@@ -139,7 +167,7 @@ const getTodoPage = (req,res)=>{
             const todos = fs.readFileSync(path.join(__dirname,'./db/todo.json')).toString()
             JSON.parse(todos).splice(0).reverse().forEach((todo)=>{
                 tasksHTML += `<li class="todo__taskcontainer">
-                <input type="checkbox" id="${todo.id}" class="todo__taskcheck">
+                <input type="checkbox" id="${todo.id}" ${todo.completed&&'checked'}  onclick="handleCheckboxClick(${todo.id})" class="todo__taskcheck">
                 <div class="">
                     <label class="todo__tasktext" ${todo.completed&&'style="text-decoration: line-through;"'} for="${todo.id}">${todo.title}</label>
                     <p class="todo__taskdate">${new Date(todo.date).toLocaleDateString()}</p>
