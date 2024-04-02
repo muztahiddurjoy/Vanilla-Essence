@@ -1,5 +1,5 @@
 {
-  "name": "Vanilla Essence",
+  "name": "vanilla-essence",
   "version": "1.0.0",
   "description": "A simple webserver which serves 3 simple webpages",
   "main": "index.js",
