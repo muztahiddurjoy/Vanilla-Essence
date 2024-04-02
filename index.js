@@ -6,23 +6,6 @@ const port = 3001
 const host = 'localhost'
 
 const server = http.createServer((req, res) => {
-    const cssPath = path.join(__dirname, 'css', req.url);
-    const fontPath = path.join(__dirname, 'public', req.url);
-    fs.readFile(cssPath, (err, data) => {
-        if (err) {
-            res.end('File not found');
-        } else {
-            res.end(data);
-        }
-    });
-    
-    fs.readFile(fontPath, (err, data) => {
-        if (err) {
-            res.end('File not found');
-        } else {
-            res.end(data);
-        }
-    });
     switch(req.url){
         case '/':
             handleHomeRequest(req,res)
@@ -89,11 +72,24 @@ const handleToDoPostRequest = (req,res)=>{
                 res.setHeader('Content-Type','application/json')
                 const result = fs.readFileSync(path.join(__dirname,'./db/todo.json'))
                 let data = JSON.parse(result)
-                
-                res.end(JSON.stringify({
-                    status:200,
-                    message:'Todo added successfully'
-                }))
+                let newData = ''
+                req.on('data',(chunk)=>{
+                    newData += String(chunk)
+                })
+                req.on('end',()=>{
+                    const {title,date} = JSON.parse(newData)
+                    data.push({
+                        id:data.length+1,
+                        title,
+                        completed:false,
+                        date
+                    })
+                    fs.writeFileSync(path.join(__dirname,'./db/todo.json'),JSON.stringify(data))
+                    res.end(JSON.stringify({
+                        status:200,
+                        message:'Todo added successfully'
+                    }))
+                })
             }
             catch(err){
                 res.end(JSON.stringify({
@@ -138,8 +134,19 @@ const getTodoPage = (req,res)=>{
         case "GET":
             res.statusCode = 200
             res.setHeader('Content-Type','text/html')
+            let tasksHTML = ""
             const file = fs.readFileSync(path.join(__dirname,'./views/todo.html')).toString()
-            res.end(file)
+            const todos = fs.readFileSync(path.join(__dirname,'./db/todo.json')).toString()
+            JSON.parse(todos).splice(0).reverse().forEach((todo)=>{
+                tasksHTML += `<li class="todo__taskcontainer">
+                <input type="checkbox" id="${todo.id}" class="todo__taskcheck">
+                <div class="">
+                    <label class="todo__tasktext" ${todo.completed&&'style="text-decoration: line-through;"'} for="${todo.id}">${todo.title}</label>
+                    <p class="todo__taskdate">${new Date(todo.date).toLocaleDateString()}</p>
+                </div>               
+                </li> `
+            })
+            res.end(file.replace('<!--LIST-->',tasksHTML))
             break;
         default:    
             res.statusCode = 404
